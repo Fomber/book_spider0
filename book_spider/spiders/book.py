@@ -1,4 +1,5 @@
 import scrapy
+from urllib import parse
 
 class book_Spider(scrapy.Spider):
     name = 'book_spider'
@@ -9,13 +10,9 @@ class book_Spider(scrapy.Spider):
         names = response.xpath('//li/article[@class="product_pod"]/h3/a')
         for book_name in names:
             print(book_name.attrib.get('title'))
-            #w150121221155555552222225
-            32222222222222
-            313232
-            31321
-            3213
-            13
-            32
-            32
-            3
-            32
+        next_url = response.xpath('//li[@class="next"]/a').attrib.get('href')
+        if next_url:
+            next_url = parse.urljoin(response.url,next_url)
+            yield scrapy.Request(next_url,callback=self.parse)
+        else:
+            print('没有获取到next的地址')
