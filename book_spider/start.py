@@ -1,3 +1,3 @@
 from scrapy import cmdline
 
-cmdline.execute(['scrapy','crawl','book_spider'])
+cmdline.execute(['scrapy','crawl','book_spider1'])
